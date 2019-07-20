@@ -8,14 +8,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="style.css">
     <title>Pomodoro</title>
 </head>
 
 <body>
     <div id="app">
+        <div class="nes-container with-title is-centered is-rounded app">
+            <p class="title">{{title}}</p>
+            <div class="timer">
+                <span>{{min}}</span>
+                <span>:</span>
+                <span>{{sec}}</span>
+            </div>
+            <div class="controls">
+                <button class="nes-btn is-success" @click="start">Start</button>
+                <button class="nes-btn is-error" @click="stop">Stop</button>
+                <button class="nes-btn is-warning " @click="reset">Reset</button>
 
-
-    </div>
+            </div>
 </body>
 <script src="script.js"></script>
 

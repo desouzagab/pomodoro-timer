@@ -1,49 +1,53 @@
- new Vue({
-     el: '#app',
-     data: {
-         name: 'Pomodoro',
-         totaltime: 25 * 60,
-         reset: false,
-         timer: null
-     },
-     methods: {
-         start: function() {
-             this.timer = setInterval(() => this.dtimer(), 1000)
-         },
-         dtimer: function() {
-             if (this.totaltime >= 1) {
-                 this.totaltime--
-             } else {
-                 this.totaltime = 0
-                 this.stop()
-                 alert("Over")
-             }
-         },
-         reset: function() {
-             this.totaltime = 60 * 25
-             clearInterval(this.timer)
-             this.timer = null
-         },
-         stop: function() {
-             clearInterval(this.timer)
-             this.timer = null
-         }
-
-
-
-     },
-     computed: {
-         min: function() {
-             const min = Math.floor(this.totaltime / 60)
-             if (min > 10) return min
-             else return '0' + min
-
-         },
-         sec: function() {
-             const sec = this.totaltime - (this.min * 60)
-             if (sec > 10) return sec
-             else return '0' + sec
-
-         }
-     }
- })
+const app = new Vue({
+    el: '#app',
+    // ========================
+    data: {
+        timer: null,
+        totalTime: (25 * 60),
+        resetButton: false,
+        title: "Let the countdown begin!!"
+    },
+    // ========================
+    methods: {
+        start: function() {
+            this.timer = setInterval(() => this.countdown(), 1000);
+            this.resetButton = true;
+            this.title = "Greatness is within sight!!"
+        },
+        stop: function() {
+            clearInterval(this.timer);
+            this.timer = null;
+            this.resetButton = true;
+            this.title = "Never quit, keep going!!"
+        },
+        reset: function() {
+            this.totalTime = (25 * 60);
+            clearInterval(this.timer);
+            this.timer = null;
+            this.resetButton = false;
+            this.title = "Let the countdown begin!!"
+        },
+        padTime: function(time) {
+            return (time < 10 ? '0' : '') + time;
+        },
+        countdown: function() {
+            if (this.totalTime >= 1) {
+                this.totalTime--;
+            } else {
+                this.totalTime = 0;
+                this.reset()
+            }
+        }
+    },
+    // ========================
+    computed: {
+        min: function() {
+            const min = Math.floor(this.totalTime / 60);
+            return this.padTime(min);
+        },
+        sec: function() {
+            const sec = this.totalTime - (this.min * 60);
+            return this.padTime(sec);
+        }
+    }
+})
